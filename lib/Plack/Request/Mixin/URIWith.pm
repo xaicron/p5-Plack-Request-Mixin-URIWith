@@ -17,14 +17,6 @@ sub uri_with {
     }
 
     my $params = do {
-        foreach my $value ( values %$args ) {
-            next unless defined $value;
-            for ( ref $value eq 'ARRAY' ? @$value : $value ) {
-                $_ = "$_";
-                utf8::encode($_) if utf8::is_utf8($_);
-            }
-        }
-
         my %params = %{ $self->uri->query_form_hash };
         foreach my $key ( keys %{$args} ) {
             my $val = $args->{$key};
